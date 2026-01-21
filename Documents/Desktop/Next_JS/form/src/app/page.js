@@ -34,7 +34,7 @@ export default function Home() {
         <label>Number</label><br /><br />
         <input placeholder="Enter Number with country code (ex: 919876543210)" value={phone} onChange={(e) => setPhone(e.target.value)} required className="absolute w-80" />
         <br /><br /><br />
-        <button type="submit" disabled={loading} className="border-1 rounded-2xl absolute left-38 top-60 p-2 bg-blue-500">{loading ? "Registering..." : "Register"}</button>
+        <button type="submit" disabled={loading} className=" rounded-2xl absolute left-39 top-58 p-3 bg-blue-500">{loading ? "Registering..." : "Register"}</button>
       </form>
     </div>
   );
