@@ -25,14 +25,16 @@ export default function Home() {
   };
 
   return (
-    <div className="absolute p-20 top-10 left-140 bg- text-">
+    <div className="relative p-20 top-10 left-140 bg- text-">
       <h2>WhatsApp Registration Form</h2>
-      <form onSubmit={handleSubmit} className='relative p-10 top-3 -left-5 border-1 rounded-2xl'>
-        <input placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} required />
+      <form onSubmit={handleSubmit} className='absolute p-10 top-30 -left-5 border-1 rounded-2xl w-100'>
+        <label>Name</label><br /><br />
+        <input placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} required  className="absolute w-80"/>
         <br /><br />
-        <input placeholder="Phone with country code (ex: 919876543210)" value={phone} onChange={(e) => setPhone(e.target.value)} required />
-        <br /><br />
-        <button type="submit" disabled={loading}>{loading ? "Registering..." : "Register"}</button>
+        <label>Number</label><br /><br />
+        <input placeholder="Enter Number with country code (ex: 919876543210)" value={phone} onChange={(e) => setPhone(e.target.value)} required className="absolute w-80" />
+        <br /><br /><br />
+        <button type="submit" disabled={loading} className="border-1 rounded-2xl absolute left-38 top-60 p-2 bg-blue-500">{loading ? "Registering..." : "Register"}</button>
       </form>
     </div>
   );
