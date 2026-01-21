@@ -25,7 +25,7 @@ export default function Home() {
   };
 
   return (
-    <div className="p-30">
+    <div className="absolute p-20 top-10 left-140 bg-center bg-whit text-white">
       <h2>WhatsApp Registration Form</h2>
       <form onSubmit={handleSubmit}>
         <input placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} required />
