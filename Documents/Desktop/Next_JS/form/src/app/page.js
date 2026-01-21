@@ -25,7 +25,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ padding: 40 }}>
+    <div className="p-30">
       <h2>WhatsApp Registration Form</h2>
       <form onSubmit={handleSubmit}>
         <input placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} required />
