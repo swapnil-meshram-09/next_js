@@ -1,38 +1,78 @@
-// import axios from "axios";
+// export async function sendWhatsAppOTP(phone, otp) {
 
-// export async function sendWhatsAppMessage(phone, message) {
-//   const url = `https://graph.facebook.com/v18.0/${process.env.WHATSAPP_PHONE_ID}/messages`;
+//   try {
 
-//   const payload = {
-//     messaging_product: "whatsapp",
-//     to: phone,
-//     type: "text",
-//     text: { body: message }
-//   };
+//     const token = process.env.WHATSAPP_TOKEN;
+//     const phoneId = process.env.WHATSAPP_PHONE_ID;
 
-//   const headers = {
-//     Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,
-//     "Content-Type": "application/json"
-//   };
+//     if (!token || !phoneId) {
+//       throw new Error("WhatsApp credentials missing");
+//     }
 
-//   await axios.post(url, payload, { headers });
+//     const url = `https://graph.facebook.com/v18.0/${phoneId}/messages`;
+
+//     const payload = {
+//       messaging_product: "whatsapp",
+//       to: "91" + phone,
+//       type: "text",
+//       text: {
+//         body: `Your OTP is ${otp}\nValid for 5 minutes`
+//       }
+//     };
+
+//     const response = await fetch(url, {
+//       method: "POST",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(payload)
+//     });
+
+//     const data = await response.json();
+
+//     console.log("WhatsApp API Response ✅", data);
+
+//     return data;
+
+//   } catch (error) {
+
+//     console.error("WhatsApp Send Error ❌", error);
+//     throw error;
+
+//   }
 // }
 
 
-import Twilio from "twilio";
 
-const client = Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+export async function sendWhatsAppOTP(phone, otp) {
 
-export async function sendWhatsAppMessage(to, message) {
-  try {
-    await client.messages.create({
-      from: process.env.TWILIO_WHATSAPP_NUMBER, // Twilio sandbox number
-      to: `whatsapp:${to}`,                     // recipient number
-      body: message,
-    });
-    console.log("WhatsApp message sent to", to);
-  } catch (err) {
-    console.error("Error sending WhatsApp message:", err);
-  }
+  const token = process.env.WHATSAPP_TOKEN;
+  const phoneId = process.env.WHATSAPP_PHONE_ID;
+
+  const url = `https://graph.facebook.com/v18.0/${phoneId}/messages`;
+
+  const payload = {
+    messaging_product: "whatsapp",
+    to: "91" + phone,
+    type: "text",
+    text: {
+      body: `Your OTP is ${otp}\n\nValid for 5 minutes`
+    }
+  };
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const data = await res.json();
+
+  console.log("WhatsApp API:", data);
+
+  return data;
 }
-
